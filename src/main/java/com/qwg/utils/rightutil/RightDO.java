@@ -8,8 +8,8 @@ import com.qwg.utils.rightutil.handler.doHandler.BizRightHandler;
  */
 public enum RightDO {
     权限_云店查看(1,"aaa",null),
-    权限_VIP购买(2,"aaa",null),
-    权限_VIP价格查看(3,"aaa",null),
+    权限_VIP价格查看(2,"aaa",null),
+    权限_VIP购买(3,"aaa",null),
     权限_云店购买(4,"aaa", BizRightHandler.getInstance());
 
     private int bit;
