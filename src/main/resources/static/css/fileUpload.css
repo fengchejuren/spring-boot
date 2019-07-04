@@ -1,0 +1,12 @@
+.table-file-upload{
+    width: 560px;
+    margin: auto;
+}
+.table-file-upload>thead td{
+    font-weight: 500;
+}
+.table-file-upload td{
+    border: 1px solid #2196f3;
+    text-align: center;
+    padding: 5px;
+}

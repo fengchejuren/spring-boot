@@ -1,0 +1,9 @@
+body {
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+}
+table{
+    cellspacing: 0px;
+    cellpadding: 0px;
+}
