@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>分片上传超大文件</title>
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/fileUpload.css" />
@@ -13,7 +15,9 @@
 </div>
 
 <div>
-    <form method="POST" enctype="multipart/form-data" id="fileForm" action="file/largeFileUpload.do">
+    <form method="POST" id="fileForm" enctype="multipart/form-data" action="largeFileUpload">
+        <!--<input type="hidden" name="name" value="jj"/>
+        <input type="hidden" name="age" value="15"/>-->
         <table class="table-file-upload">
             <thead>
                 <tr>
@@ -52,9 +56,8 @@
     })
     
     function submitForm() {
-        var settings = {};
-        settings.url = 'largeFileUpload';
-        $('#fileForm').submitLargeFileForm(settings,handlerFunc)
+        var settings = {'url':'largeFileUpload','bytesPerPiece':1024*1024};
+        $('#fileForm').submitLargeFileForm(settings,handlerFunc);
     }
     function handlerFunc(result) {
         if(result.code == '10000'){
