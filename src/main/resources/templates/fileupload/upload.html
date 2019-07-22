@@ -54,17 +54,18 @@
             submitForm();
         });
     })
-    
+
     function submitForm() {
-        var settings = {'url':'largeFileUpload','bytesPerPiece':1024*1024};
+        var settings = {'url':'largeFileUpload','bytesPerPiece':1024*1024*5};
         $('#fileForm').submitLargeFileForm(settings,handlerFunc);
     }
     function handlerFunc(result) {
-        if(result.code == '10000'){
+        console.log(result);
+        /*if(result.code == '10000'){
             alert('ok');
         }else{
             alert(result.msg);
-        }
+        }*/
     }
 </script>
 </html>

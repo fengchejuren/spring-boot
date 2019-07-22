@@ -1,6 +1,7 @@
 package com.qwg.webcontroller;
 
 import com.qwg.services.UserService;
+import com.qwg.utils.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.HashMap;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2019/6/10.
@@ -38,16 +41,28 @@ public class FileController {
 
     @RequestMapping(value = "/largeFileUpload", method = RequestMethod.POST)
     @ResponseBody
-    public String largeFileUpload(@RequestParam("file") MultipartFile file, String index,String finished){
+    public Object largeFileUpload(@RequestParam("file") MultipartFile file, int index,String finished){
         if (!file.isEmpty()) {
             try {
                 BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream(new File(fileLocation + File.pathSeparator+
-                                file.getOriginalFilename())));
+                        new FileOutputStream(new File("/web/quanwugou/tomcat/res/"+file.getOriginalFilename())));
                 System.out.println(file.getName());
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
+                if("1".equals(finished)){
+                    try {
+                        String fileName = file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf("."));
+                        File[] files = new File[index+1];
+                        for(int i=0; i<index; i++){
+                            File f = new File("/web/quanwugou/tomcat/res/"+fileName+".part"+i);
+                            files[i] = f;
+                        }
+                        FileUtil.mergeFile(fileName,files);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 return "上传失败," + e.getMessage();

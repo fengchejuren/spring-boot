@@ -8,21 +8,12 @@
   };
   var stateCode = '200';    //状态码:200-准备就绪,201-上传中,206-上传成功,207-上传失败
   var substate = [];
-  var handlerFunction;
-  var completeFunc = function (result,handler) {
-      if(result.code == '10000'){
-          if(substate.every(value => value){
-              handler.call(window,result);
-          }
-      }
-  };
   $.fn.extend({
       submitLargeFileForm: function (settings,handler) {
           if(stateCode == '201'){
               return false;
           }
           stateCode = '201';
-          handlerFunction = handler;
           Object.assign(_settings,settings);
           //获取表单中的文件
           var file;
