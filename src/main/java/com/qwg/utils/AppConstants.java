@@ -46,4 +46,11 @@ public class AppConstants
      * 原因/提示语
      */
     public static final String msg = "msg";
+
+
+    /**
+     * 多步操作的过程中,中间的一步操作结果成功
+     * (比如分片上传超大文件,某一片上传成功返回给前端的状态码)
+     */
+    public static final String state_process = "10003";
 }

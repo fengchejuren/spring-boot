@@ -1,6 +1,7 @@
 package com.qwg.webcontroller;
 
 import com.qwg.services.UserService;
+import com.qwg.utils.AppConstants;
 import com.qwg.utils.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
@@ -42,37 +44,45 @@ public class FileController {
     @RequestMapping(value = "/largeFileUpload", method = RequestMethod.POST)
     @ResponseBody
     public Object largeFileUpload(@RequestParam("file") MultipartFile file, int index,String finished){
+        Map<String,Object> map = new HashMap<String,Object>();
         if (!file.isEmpty()) {
             try {
                 BufferedOutputStream out = new BufferedOutputStream(
                         new FileOutputStream(new File("/web/quanwugou/tomcat/res/"+file.getOriginalFilename())));
-                System.out.println(file.getName());
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
+                map.put(AppConstants.code,AppConstants.state_process);
+                map.put(AppConstants.msg,"成功上传第"+index+"个子文件!");
                 if("1".equals(finished)){
                     try {
                         String fileName = file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf("."));
                         File[] files = new File[index+1];
-                        for(int i=0; i<index; i++){
+                        for(int i=0; i<=index; i++){
                             File f = new File("/web/quanwugou/tomcat/res/"+fileName+".part"+i);
                             files[i] = f;
                         }
-                        FileUtil.mergeFile(fileName,files);
+                        map = FileUtil.mergeFile(fileName,files);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        map.put(AppConstants.code,AppConstants.fail);
+                        map.put(AppConstants.msg,"文件合并失败,请联系管理员!");
                     }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                return "上传失败," + e.getMessage();
+                map.put(AppConstants.code,AppConstants.fail);
+                map.put(AppConstants.msg,"文件合并失败,请联系管理员!");
             } catch (IOException e) {
                 e.printStackTrace();
-                return "上传失败," + e.getMessage();
+                map.put(AppConstants.code,AppConstants.fail);
+                map.put(AppConstants.msg,"文件合并失败,请联系管理员!");
             }
-            return "fileupload/upload";
+            return map;
         } else {
-            return "fileupload/upload";
+            map.put(AppConstants.code,AppConstants.fail);
+            map.put(AppConstants.msg,"上传了一个空的文件");
+            return map;
         }
     }
 }

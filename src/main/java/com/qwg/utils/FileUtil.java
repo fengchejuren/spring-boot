@@ -25,18 +25,19 @@ public class FileUtil {
                     continue;
                 }
                 BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(f));
-                int length=0;
+                int length;
                 while ((length = inputStream.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, length);
                 }
                 inputStream.close();
                 outputStream.flush();
             }
+            outputStream.flush();
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
             map.put(AppConstants.code,AppConstants.fail);
-            map.put(AppConstants.msg,"文件合并失败");
+            map.put(AppConstants.msg,"文件合并失败,请联系管理员");
             return map;
         }
         for(File f: files){
@@ -46,7 +47,7 @@ public class FileUtil {
         }
         map.put(AppConstants.code,AppConstants.success);
         map.put(AppConstants.msg,"文件合并成功");
-        map.put("file",finalFile);
+        map.put("fileName",finalFile.getName());
         return map;
     }
 

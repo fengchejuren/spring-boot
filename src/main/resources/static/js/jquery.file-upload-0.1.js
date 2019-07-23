@@ -7,7 +7,7 @@
       maxFileSize: 1024*1024*1024,   //总文件大小:1G
   };
   var stateCode = '200';    //状态码:200-准备就绪,201-上传中,206-上传成功,207-上传失败
-  var substate = [];
+  var substate;
   $.fn.extend({
       submitLargeFileForm: function (settings,handler) {
           if(stateCode == '201'){
@@ -36,6 +36,7 @@
           var start = 0;
           var end=0;
           var index = 0;
+          substate = new Array(Math.ceil(fileSize/_settings.bytesPerPiece));
           while(start<fileSize && stateCode == '201'){
               var fm = new FormData();
               fm.set('index',index);
@@ -53,10 +54,13 @@
                   'type': 'POST',
                   'cache': false,
                   'data': fm,
+                  async:false,
                   'processData': false,
                   'contentType':false,
                   'success': function(result){
-                      if(result.code == '10000'){
+                      if(result.code == '10003'){
+                          substate[index] = true;
+                      }else if(result.code == '10000'){
                           substate[index] = true;
                           if(substate.every(value=>value)){
                               stateCode = '206';
@@ -64,17 +68,20 @@
                           }
                       }else{
                           stateCode = '207';
-                          handlerFunc.call(window,result);
+                          handler.call(window,result);
                       }
                   },
                   'fail': function (result) {
                       stateCode = '207';
-                      handlerFunc.call(window,result);
+                      handler.call(window,result);
                   }
               });
               start = end;
               index++;
           }
+      },
+      getState: function () {
+          return stateCode;
       }
   })
 })(jQuery)

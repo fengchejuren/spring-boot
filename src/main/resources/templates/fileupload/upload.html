@@ -21,7 +21,7 @@
         <table class="table-file-upload">
             <thead>
                 <tr>
-                    <td colspan="2">分片上传超大文件</td>
+                    <td colspan="2">分片上传超大文件<span th:text="${session.id}">123</span></td>
                 </tr>
             </thead>
             <tbody>
@@ -60,12 +60,13 @@
         $('#fileForm').submitLargeFileForm(settings,handlerFunc);
     }
     function handlerFunc(result) {
-        console.log(result);
-        /*if(result.code == '10000'){
-            alert('ok');
+        if($('#fileForm').getState() == '206'){
+            //上传文件成功,result中包含文件名,这个时候再把表单(包含其他非二进制DOM)提交给后台处理
+            alert(result.fileName);
         }else{
-            alert(result.msg);
-        }*/
+            //上传失败,会返回错误信息
+            alert(result.msg)
+        }
     }
 </script>
 </html>
