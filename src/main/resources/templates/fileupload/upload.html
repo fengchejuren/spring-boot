@@ -56,7 +56,10 @@
     })
 
     function submitForm() {
-        var settings = {'url':'largeFileUpload','bytesPerPiece':1024*1024*5};
+        var showProgress = function(percent,total) {
+            console.log("上传进度" + percent +",上传文件总的大小:"+total)
+        }
+        var settings = {'url':'largeFileUpload','bytesPerPiece':1024*1024*5,'showProgress':showProgress};
         $('#fileForm').submitLargeFileForm(settings,handlerFunc);
     }
     function handlerFunc(result) {
@@ -68,5 +71,6 @@
             alert(result.msg)
         }
     }
+
 </script>
 </html>
