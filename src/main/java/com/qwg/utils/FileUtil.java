@@ -31,9 +31,11 @@ public class FileUtil {
                 }
                 inputStream.close();
                 outputStream.flush();
+                System.gc();
             }
             outputStream.flush();
             outputStream.close();
+            System.gc();
         } catch (IOException e) {
             e.printStackTrace();
             map.put(AppConstants.code,AppConstants.fail);

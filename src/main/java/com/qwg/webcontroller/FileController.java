@@ -60,9 +60,10 @@ public class FileController {
                         File[] files = new File[index+1];
                         for(int i=0; i<=index; i++){
                             File f = new File("/web/quanwugou/tomcat/res/"+fileName+".part"+i);
-                            while (!f.exists() || f.canRead()){
+                            while (!f.exists() || !f.canRead()){
                                 TimeUnit.MILLISECONDS.sleep(500);
                             }
+                            files[i] = f;
                         }
                         map = FileUtil.mergeFile(fileName,files);
                     } catch (Exception e) {

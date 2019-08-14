@@ -65,10 +65,11 @@
     function handlerFunc(result) {
         if($('#fileForm').getState() == '206'){
             //上传文件成功,result中包含文件名,这个时候再把表单(包含其他非二进制DOM)提交给后台处理
-            alert(result.fileName);
+            console.log(result.fileName);
+            //此时可以提交表单
         }else{
             //上传失败,会返回错误信息
-            alert(result.msg)
+            console.log(result.msg)
         }
     }
 

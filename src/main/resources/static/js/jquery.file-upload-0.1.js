@@ -8,8 +8,8 @@
         maxFileSize: 1024*1024*1024,   //总文件大小:1G
         //keyFileName: '',  //提交到后台的文件名
         /*showProgress: function (percent,total) {
-            console.log('文件大小为'+parseInt(total/1024/1024)+"M,已经上传"+percent)
-        },*/
+         console.log('文件大小为'+parseInt(total/1024/1024)+"M,已经上传"+percent)
+         },*/
         //acceptType: '',   //允许接收的文件类型
     };
     var stateCode = '200';    //状态码:200-准备就绪,201-上传中,206-上传成功,207-上传失败
