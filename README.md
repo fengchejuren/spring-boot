@@ -11,3 +11,8 @@ spring-boot
 2019年8月14日16:30:30
 大文件分片上传-->
 关联文件: FileController.java | jquery.file-upload-0.1.js | upload.html | FileUtil.java
+
+2019年8月19日18:18:12
+集成druid数据库连接池,配置druid监控系统-->
+关联文件: DruidConfiguration.java | application.properties | pom.xml
+

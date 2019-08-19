@@ -6,11 +6,11 @@
     var _settings = {
         bytesPerPiece: 1024*1024*10,//单个文件大小:10M
         maxFileSize: 1024*1024*1024,   //总文件大小:1G
-        //keyFileName: '',  //提交到后台的文件名
-        /*showProgress: function (percent,total) {
+        keyFileName: '',  //提交到后台的文件名,建议加上时间戳.防止后台有提交同名的文件时可能读取不是目标文件
+        showProgress: function (percent,total) {
          console.log('文件大小为'+parseInt(total/1024/1024)+"M,已经上传"+percent)
-         },*/
-        //acceptType: '',   //允许接收的文件类型
+         }, //显示进度函数,可以重写此方法
+        acceptType: '',   //允许接收的文件类型,默认为所有类型
     };
     var stateCode = '200';    //状态码:200-准备就绪,201-上传中,206-上传成功,207-上传失败
     $.fn.extend({
