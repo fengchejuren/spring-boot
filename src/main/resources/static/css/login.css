@@ -1,0 +1,35 @@
+body {
+    width:100%;
+    margin:10px;
+}
+table{
+    width: 580px;
+    margin: auto;
+}
+table td{
+    height:28px;
+    font-size: 18px;
+    line-height: 28px;
+    border:1px solid #ccc;
+    vertical-align: middle;
+    padding:5px;
+}
+table td input[type=text],table td input[type=password]{
+    height:26px;
+    line-height: 26px;
+    border:1px solid #ccc;
+    padding:5px;
+}
+table td:nth-child(odd){
+    text-align: right;
+}
+table td:nth-child(even){
+    text-align: left;
+}
+.btn {
+    width: 30%;
+    background: #f9e5dd;
+    margin: 5px 30px;
+    float: right;
+    font-size: 28px;
+}

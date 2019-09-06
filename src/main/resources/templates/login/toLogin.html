@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>用户登录</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    <script type="text/javascript" src="../lib/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <form method="POST" id="loginForm" action="login">
+        <table>
+            <tr>
+                <td>
+                    sessionId:
+                </td>
+                <td>
+                    <span th:text="${sessionId}">sessionId</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    端口号:
+                </td>
+                <td>
+                    <span th:text="${port}">端口号</span>
+                </td>
+            </tr>
+            <tr>
+                <td>用户名</td>
+                <td><input type="text" name="username" placeholder="请输入用户名"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="password" name="password" placeholder="请输入密码"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" class="btn" value="登录" id="loginBtn"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+<script th:inline="javascript">
+    $(function(){
+        $('#loginBtn').on('click',function () {
+            $('#loginForm').submit();
+        });
+    })
+</script>
+</html>

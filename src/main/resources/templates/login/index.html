@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>用户登录</title>
+    <script type="text/javascript" src="../lib/jquery-3.4.1.js"></script>
+</head>
+<body>
+    欢迎你来登录!<span th:text="${username}">小明</span>
+    sessionId:<span th:text="${sessionId}">sessionId</span>
+    端口号:<span th:text="${port}">port</span>
+</body>
+
+<script th:inline="javascript">
+    $(function(){
+
+    })
+</script>
+</html>
